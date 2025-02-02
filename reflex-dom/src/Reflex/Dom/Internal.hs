@@ -29,8 +29,6 @@ import qualified Reflex.Dom.Main as Main
 run :: a -> a
 run = id
 #elif defined(MIN_VERSION_jsaddle_warp)
-import Data.Maybe (maybe)
-import Data.Monoid ((<>))
 import Language.Javascript.JSaddle (JSM)
 import qualified Language.Javascript.JSaddle.Warp as JW
 import System.Environment (lookupEnv)

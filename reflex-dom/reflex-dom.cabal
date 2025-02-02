@@ -1,11 +1,6 @@
 cabal-version:      1.24
 name:               reflex-dom
-version:            0.6.3.1
-license:            BSD3
-license-file:       LICENSE
-maintainer:         ryan.trinkle@gmail.com
-author:             Ryan Trinkle
-stability:          Experimental
+version:            0.6.3.3
 synopsis:           Functional Reactive Web Apps with Reflex
 description:
     Web applications without callbacks or side-effects.
@@ -20,7 +15,11 @@ description:
     All of @reflex-dom-core@'s modules are re-exported by @reflex-dom@.
     .
     For Hackage documentation, please see: <https://hackage.haskell.org/package/reflex-dom-core>.
-
+license:            BSD3
+license-file:       LICENSE
+author:             Ryan Trinkle
+maintainer:         ryan.trinkle@gmail.com
+stability:          Experimental
 category:
     FRP, Web, GUI, HTML, Javascript, Reactive, Reactivity, User Interfaces, User-interface
 
@@ -67,6 +66,11 @@ flag wasm32
     manual:      True
 
 library
+    default-language:   Haskell2010
+    hs-source-dirs:     src
+    cc-options:         -fPIC
+    ghc-options:
+        -Wall -fwarn-tabs -funbox-strict-fields -O2 -ferror-spans -fPIC
     exposed-modules:
         Reflex.Dom
         Reflex.Dom.Internal
@@ -100,17 +104,11 @@ library
         Reflex.Dom.Xhr,
         Reflex.Dom.Xhr.FormData
 
-    cc-options:         -fPIC
-    hs-source-dirs:     src
-    default-language:   Haskell2010
-    ghc-options:
-        -Wall -fwarn-tabs -funbox-strict-fields -O2 -ferror-spans -fPIC
-
     build-depends:
-        base >=4.7 && <4.21,
+        base >=4.7 && <4.22,
         bytestring >=0.10 && <0.13,
         reflex >=0.8 && <1,
-        reflex-dom-core >=0.6.1.0 && <0.9,
+        reflex-dom-core >=0.8.1.0 && <0.9,
         text >=1.2 && <2.2
 
     if os(android)
@@ -124,7 +122,7 @@ library
         build-depends:
             aeson >=1.4 && <2.3,
             android-activity >=0.2 && <0.3,
-            data-default >=0.7 && <0.8,
+            data-default >=0.7 && <0.9,
             jsaddle >=0.9.6 && <0.10
 
     if !(impl(ghcjs >=0) || arch(javascript))
@@ -136,7 +134,7 @@ library
         else
             if (os(osx) || os(ios))
                 build-depends:
-                    data-default >=0.7 && <0.8,
+                    data-default >=0.7 && <0.9,
                     jsaddle >=0.9.6 && <0.10,
                     jsaddle-wkwebview >=0.9.6 && <0.10
 
@@ -187,9 +185,9 @@ executable sortableList
         ghc-options: -fplugin=Reflex.Optimizer
 
 executable benchmark
+    default-language: Haskell2010
     main-is:          benchmark.hs
     hs-source-dirs:   .
-    default-language: Haskell2010
     ghc-options:      -O2 -fspecialise-aggressively
     build-depends:
         base,

@@ -4,6 +4,9 @@ packages:
   chrome-test-utils/
   reflex-dom-test-selenium/
 
+tests: True
+benchmarks: True
+
 if arch(javascript)
   extra-packages: ghci
 

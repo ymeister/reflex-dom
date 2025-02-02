@@ -64,6 +64,16 @@ module Reflex.Dom.Widget.Basic
 
 import Prelude hiding (mapM, mapM_, sequence, sequence_)
 
+import Reflex.Adjustable.Class
+import Reflex.Class
+import Reflex.Collection
+import Reflex.Dom.Builder.Class
+import Reflex.Dom.Class
+import Reflex.Dynamic
+import Reflex.Network
+import Reflex.PostBuild.Class
+import Reflex.Workflow
+
 import Control.Lens hiding (children, element)
 import Control.Monad.Fix
 import Data.Align
@@ -87,16 +97,6 @@ import Control.Arrow
 import Control.Monad.Reader hiding (forM, forM_, mapM, mapM_, sequence, sequence_)
 import Data.Either
 #endif
-
-import Reflex.Adjustable.Class
-import Reflex.Class
-import Reflex.Collection
-import Reflex.Dom.Builder.Class
-import Reflex.Dom.Class
-import Reflex.Dynamic
-import Reflex.Network
-import Reflex.PostBuild.Class
-import Reflex.Workflow
 
 -- | Breaks the given Map into pieces based on the given Set.  Each piece will contain only keys that are less than the key of the piece, and greater than or equal to the key of the piece with the next-smaller key.  There will be one additional piece containing all keys from the original Map that are larger or equal to the largest key in the Set.
 -- Either k () is used instead of Maybe k so that the resulting map of pieces is sorted so that the additional piece has the largest key.

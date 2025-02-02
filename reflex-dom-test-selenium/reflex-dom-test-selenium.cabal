@@ -1,45 +1,44 @@
 cabal-version: 1.24
 name:          reflex-dom-test-selenium
 version:       0.0.0.1
+synopsis:      Testing framework for selenium tests
 license:       BSD3
 license-file:  LICENSE
-maintainer:    ryan.trinkle@gmail.com
 author:        Ryan Trinkle
+maintainer:    ryan.trinkle@gmail.com
 stability:     Experimental
-synopsis:      Testing framework for selenium tests
 category:
     FRP, Web, GUI, HTML, Javascript, Reactive, Reactivity, User Interfaces, User-interface
 
 build-type:    Simple
 
 library
-    exposed-modules:  Reflex.Dom.Test.Selenium
-    hs-source-dirs:   src
-    default-language: Haskell98
-    ghc-options:
-        -Wall -fwarn-tabs -funbox-strict-fields -O2 -ferror-spans
-        -fspecialise-aggressively
+  default-language: Haskell98
+  hs-source-dirs: src
+  exposed-modules:  Reflex.Dom.Test.Selenium
+  ghc-options:
+      -Wall -fwarn-tabs -funbox-strict-fields -O2 -ferror-spans
+      -fspecialise-aggressively
+  build-depends:
+    async,
+    base >= 4.7 && < 4.22,
+    bytestring >= 0.10 && < 0.13,
+    chrome-test-utils,
+    exceptions,
+    hspec-core < 2.12,
+    hspec-webdriver >= 1.2.2,
+    http-types,
+    jsaddle >= 0.9.0.0 && < 0.10,
+    jsaddle-warp,
+    network,
+    process,
+    reflex-dom-core,
+    silently,
+    text >= 1.2 && < 2.2,
+    wai,
+    warp,
+    webdriver,
+    websockets
 
-    build-depends:
-        async <2.3,
-        base >=4.7 && <=4.21,
-        bytestring >=0.10 && <0.13,
-        chrome-test-utils,
-        exceptions,
-        hspec-core <2.12,
-        hspec-webdriver >=1.2.2 && <1.3,
-        http-types <0.13,
-        jsaddle >=0.9.0.0 && <0.10,
-        jsaddle-warp <0.10,
-        network <3.3,
-        process,
-        reflex-dom-core,
-        silently <1.3,
-        text >=1.2 && <2.2,
-        wai <3.3,
-        warp <3.5,
-        webdriver <0.13,
-        websockets <0.14
-
-    if (!os(linux) || !arch(x86_64))
-        buildable: False
+  if (!os(linux) || !arch(x86_64))
+    buildable: False

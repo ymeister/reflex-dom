@@ -9,6 +9,16 @@
 
 module Reflex.Dom.Widget.Resize where
 
+import Reflex.Class
+import Reflex.Time
+import Reflex.Dom.Builder.Class
+import Reflex.Dom.Builder.Immediate
+import Reflex.Dom.Class
+import Reflex.Dom.Widget.Basic
+import Reflex.PerformEvent.Class
+import Reflex.PostBuild.Class
+import Reflex.TriggerEvent.Class
+
 import Control.Monad.Fix
 import Control.Monad.IO.Class
 import Data.Map (Map)
@@ -26,16 +36,6 @@ import qualified GHCJS.DOM.Types as DOM
 import Control.Monad
 import Data.Monoid
 #endif
-
-import Reflex.Class
-import Reflex.Time
-import Reflex.Dom.Builder.Class
-import Reflex.Dom.Builder.Immediate
-import Reflex.Dom.Class
-import Reflex.Dom.Widget.Basic
-import Reflex.PerformEvent.Class
-import Reflex.PostBuild.Class
-import Reflex.TriggerEvent.Class
 
 -- | A widget that wraps the given widget in a div and fires an event when resized.
 --   Adapted from @github.com\/marcj\/css-element-queries@

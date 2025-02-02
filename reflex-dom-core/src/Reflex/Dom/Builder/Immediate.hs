@@ -161,6 +161,24 @@ import GHCJS.DOM.UIEvent
 #ifndef ghcjs_HOST_OS
 import Language.Javascript.JSaddle (call, eval) -- Avoid using eval in ghcjs. Use ffi instead
 #endif
+import Reflex.Adjustable.Class
+import Reflex.Class as Reflex
+import Reflex.Dom.Builder.Class
+import Reflex.Dynamic
+import Reflex.Host.Class
+import Reflex.Patch.MapWithMove (PatchMapWithMove(..))
+import Reflex.PerformEvent.Base (PerformEventT)
+import Reflex.PerformEvent.Class
+import Reflex.PostBuild.Base (PostBuildT)
+import Reflex.PostBuild.Class
+#ifdef PROFILE_REFLEX
+import Reflex.Profiled
+#endif
+import Reflex.Requester.Base
+import Reflex.Requester.Class
+import Reflex.Spider (Spider, SpiderHost, Global)
+import Reflex.TriggerEvent.Base hiding (askEvents)
+import Reflex.TriggerEvent.Class
 
 import qualified Data.Dependent.Map as DMap
 import qualified Data.FastMutableIntMap as FastMutableIntMap
@@ -194,24 +212,6 @@ import Data.Monoid ((<>))
 import GHCJS.DOM.Types (KeyboardEvent, ClipboardEvent)
 #endif
 
-import Reflex.Adjustable.Class
-import Reflex.Class as Reflex
-import Reflex.Dom.Builder.Class
-import Reflex.Dynamic
-import Reflex.Host.Class
-import Reflex.Patch.MapWithMove (PatchMapWithMove(..))
-import Reflex.PerformEvent.Base (PerformEventT)
-import Reflex.PerformEvent.Class
-import Reflex.PostBuild.Base (PostBuildT)
-import Reflex.PostBuild.Class
-#ifdef PROFILE_REFLEX
-import Reflex.Profiled
-#endif
-import Reflex.Requester.Base
-import Reflex.Requester.Class
-import Reflex.Spider (Spider, SpiderHost, Global)
-import Reflex.TriggerEvent.Base hiding (askEvents)
-import Reflex.TriggerEvent.Class
 import qualified Reflex.Patch.DMap as PatchDMap
 import qualified Reflex.Patch.DMapWithMove as PatchDMapWithMove
 import qualified Reflex.Patch.MapWithMove as PatchMapWithMove
@@ -474,7 +474,7 @@ removeSubsequentNodes :: (MonadJSM m, IsNode n) => n -> m ()
 #ifdef ghcjs_HOST_OS
 --NOTE: Although wrapping this javascript in a function seems unnecessary, GHCJS's optimizer will break it if it is entered without that wrapping (as of 2021-11-06)
 foreign import javascript unsafe
-#ifdef __GHCJS__
+#if __GLASGOW_HASKELL__ < 900
   "(function() { var n = $1; while (n['nextSibling']) { n['parentNode']['removeChild'](n['nextSibling']); }; })()"
 #else
   "(function(n) { while (n['nextSibling']) { n['parentNode']['removeChild'](n['nextSibling']); }; })"
@@ -501,7 +501,7 @@ extractBetweenExclusive :: (MonadJSM m, IsNode start, IsNode end) => DOM.Documen
 #ifdef ghcjs_HOST_OS
 --NOTE: Although wrapping this javascript in a function seems unnecessary, GHCJS's optimizer will break it if it is entered without that wrapping (as of 2021-11-06)
 foreign import javascript unsafe
-#ifdef __GHCJS__
+#if __GLASGOW_HASKELL__ < 900
   "(function() { var df = $1; var s = $2; var e = $3; var x; for(;;) { x = s['nextSibling']; if(e===x) { break; }; df['appendChild'](x); } })()"
 #else
   "(function(df, s, e) { var x; for(;;) { x = s['nextSibling']; if(e===x) { break; }; df['appendChild'](x); } })"
@@ -526,10 +526,10 @@ extractUpTo :: (MonadJSM m, IsNode start, IsNode end) => DOM.DocumentFragment ->
 #ifdef ghcjs_HOST_OS
 --NOTE: Although wrapping this javascript in a function seems unnecessary, GHCJS's optimizer will break it if it is entered without that wrapping (as of 2017-09-04)
 foreign import javascript unsafe
-#ifdef __GHCJS__
+#if __GLASGOW_HASKELL__ < 900
   "(function() { var x = $2; while(x !== $3) { var y = x['nextSibling']; $1['appendChild'](x); x = y; } })()"
 #else
-  "(function($1, x, $3) { while(x !== $3) { var y = x['nextSibling']; $1['appendChild'](x); x = y; } })"
+  "(function(_, x, $3) { while(x !== $3) { var y = x['nextSibling']; $1['appendChild'](x); x = y; } })"
 #endif
   extractUpTo_ :: DOM.DocumentFragment -> DOM.Node -> DOM.Node -> IO ()
 extractUpTo df s e = liftJSM $ extractUpTo_ df (toNode s) (toNode e)

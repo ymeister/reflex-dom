@@ -14,36 +14,36 @@
 #endif
 
 module Reflex.Dom.Old
-  ( MonadWidget
-  , El
-  , ElConfig (..)
-  , elConfig_namespace
-  , elConfig_attributes
-  , _el_clicked
-  , _el_element
-  , _el_events
-  , addVoidAction
-  , AttributeMap
-  , Attributes (..)
-  , buildElement
-  , buildElementNS
-  , buildEmptyElement
-  , buildEmptyElementNS
-  , elDynHtml'
-  , elDynHtmlAttr'
-  , elStopPropagationNS
-  , elWith
-  , elWith'
-  , emptyElWith
-  , emptyElWith'
-  , namedNodeMapGetNames
-  , nodeClear
-  , onEventName
-  , schedulePostBuild
-  , text'
-  , unsafePlaceElement
-  , WidgetHost
-  , wrapElement
+       ( MonadWidget
+       , El
+       , ElConfig (..)
+       , elConfig_namespace
+       , elConfig_attributes
+       , _el_clicked
+       , _el_element
+       , _el_events
+       , addVoidAction
+       , AttributeMap
+       , Attributes (..)
+       , buildElement
+       , buildElementNS
+       , buildEmptyElement
+       , buildEmptyElementNS
+       , elDynHtml'
+       , elDynHtmlAttr'
+       , elStopPropagationNS
+       , elWith
+       , elWith'
+       , emptyElWith
+       , emptyElWith'
+       , namedNodeMapGetNames
+       , nodeClear
+       , onEventName
+       , schedulePostBuild
+       , text'
+       , unsafePlaceElement
+       , WidgetHost
+       , wrapElement
   ) where
 
 import Control.Arrow (first)

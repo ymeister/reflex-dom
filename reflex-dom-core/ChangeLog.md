@@ -1,5 +1,15 @@
 # Revision history for reflex-dom-core
 
+## 0.8.1.2
+* Support GHC 9.12
+
+## 0.8.1.1
+* Support GHC 9.10
+
+## 0.8.1.0
+
+* Add functions for managing history (popHistoryState and manageHistoryExposingExternalUpdates)
+
 ## 0.8.0.0-r1
 
 * Loosen lens version bounds
@@ -24,7 +34,7 @@
 
 ## 0.7.0.0
 
-* Breaking change: Remove HasJSContext and MonadJS. This change also removes the `js` type parameter from `Prerender`. Change `Prerender js t m` to `Prerender t m`.
+* ([#429](https://github.com/reflex-frp/reflex-dom/pull/429)) **(Breaking change)** Remove HasJS, HasJSContext and MonadJS. This change also removes the `js` type parameter from `Prerender`. Change `Prerender js t m` to `Prerender t m`.
   * `Reflex.Dom.WebSocket.Foreign.newWebSocket` takes one fewer argument: the first argument used to be a js context
 
 ## 0.6.3.0

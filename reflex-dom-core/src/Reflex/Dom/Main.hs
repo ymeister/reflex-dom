@@ -17,6 +17,17 @@ module Reflex.Dom.Main where
 
 import Prelude hiding (concat, mapM, mapM_, sequence, sequence_)
 
+import Reflex.Adjustable.Class
+import Reflex.Class
+import Reflex.Dom.Builder.Immediate
+import Reflex.Dom.Class
+import Reflex.Host.Class
+import Reflex.PerformEvent.Base
+import Reflex.PostBuild.Base
+import Reflex.Spider (Global, Spider, SpiderHost, runSpiderHost)
+import Reflex.TriggerEvent.Base
+import Reflex.TriggerEvent.Class
+
 import Control.Concurrent
 import Control.Lens
 import Control.Monad
@@ -46,16 +57,6 @@ import qualified GHCJS.DOM.Types as DOM
 import Data.Monoid ((<>))
 #endif
 
-import Reflex.Adjustable.Class
-import Reflex.Class
-import Reflex.Dom.Builder.Immediate
-import Reflex.Dom.Class
-import Reflex.Host.Class
-import Reflex.PerformEvent.Base
-import Reflex.PostBuild.Base
-import Reflex.Spider (Global, Spider, SpiderHost, runSpiderHost)
-import Reflex.TriggerEvent.Base
-import Reflex.TriggerEvent.Class
 #ifdef PROFILE_REFLEX
 import Reflex.Profiled
 #endif

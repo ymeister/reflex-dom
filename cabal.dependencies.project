@@ -14,7 +14,7 @@ if !arch(javascript)
   source-repository-package
     type: git
     location: https://github.com/ndmitchell/hlint.git
-    tag: 49f47288040400f1a4c4af71646d2037fdbbd72b
+    tag: 74542f93459e1e3ab3070d707a1e9922c465ff05
     --sha256: sha256-gHVNiyYkCX8DKzOEt2HeV+2v/AyafpjsgfZbZjHo0lM=
 
   source-repository-package
